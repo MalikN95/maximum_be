@@ -1,0 +1,13 @@
+export const SEND_PASSWORD_RESET_EMAIL = 'Send password reset password';
+export const FAIL_PASSWORD_RESET = 'Fail password Reset';
+export const LINK_ALREADY_USE = 'The link has already been used.';
+export const SUCCESSFULLY_PASSWORD_RESET = 'Successfully password Reset';
+export const SUCCESSFULLY_DELETE_USER = 'Successfully delete user';
+export const EMAIL_NOT_EXIST = `An active account matching that email doesnt exist`;
+export const USER_NOT_FOUND = 'User not found';
+export const USER_CAN_NOT_CHANGE_OWN_ROLE = `User can't change own role`;
+export const INCORRECT_PASSWORD = 'Entered password is incorrect';
+export const EMAIL_ALREADY_USED = 'Email already used';
+export const PHONE_VALIDATION = 'Phone can contain only symbols.';
+export const FAX_VALIDATION = 'Fax can contain only symbols.';
+export const USER_FOLDER = 'user';

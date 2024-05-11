@@ -1,0 +1,56 @@
+version: '3.5'
+
+services:
+  maximum_backend:
+    image: maximum_backend:local
+    container_name: maximum_backend
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: devops/Dockerfile
+    depends_on:
+      - maximum_database
+    networks:
+      - maximum
+    ports:
+      - 127.0.0.1:3001:3001
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - BASIC_URL=https://maximum-lgh.nrw:8443
+      - FRONTEND_URL=https://maximum-lgh.nrw
+      - ACCESS_TOKEN_EXPIRES_IN=30m
+      - REFRESH_TOKEN_EXPIRES_IN=60m
+      - JWT_SECRET=maximumSecter
+      - SALT_VALUE=10
+      - POSTGRES_PORT=5432
+      - DB_TYPE=postgres
+      - POSTGRES_DATABASE=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=A7d#CGvIziZh
+      - POSTGRES_HOST=maximum_database
+      - TYPEORM_SYNC=true
+      - SENDER=no-reply@lgh.de
+      - SENDER_MAIL=lgh-sender@lgh.de
+      - SENDER_PASSWORD=SMTPAuth_1808!
+      - MAIL_HOST=smtp.office365.com
+      - MAIL_PORT=587
+      - ENABLE_API=false
+
+  maximum_database:
+    image: postgres:latest
+    container_name: maximum_database
+    restart: unless-stopped
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=A7d#CGvIziZh
+    networks:
+      - maximum
+    ports:
+      - 127.0.0.1:5432:5432
+
+networks:
+  maximum:

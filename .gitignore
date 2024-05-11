@@ -1,0 +1,54 @@
+# compiled output
+/build
+/dist
+/node_modules
+/uploads
+/pgdata
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.dccache
+
+# IDE - VSCode
+.vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# envs
+.env
+.env.prod
+
+# postgres
+pgdata
+
+#core dump when node crashes
+core
+
+# This is a yarn project, yarn is safer (hash verification protects agains mitm),
+# and, also, package-lock.json breaks the build on PR action (potentially the 
+# server build as well)
+package-lock.json
