@@ -292,6 +292,13 @@ export class UserService {
   }
 
   async inviteUser(userId: string): Promise<boolean> {
+    const checkAccess = await this.userRepository
+      .createQueryBuilder('user')
+      .where('user.id = :userId', { userId })
+      .getOne();
+
+    if (checkAccess.hasServiceAccess) return true;
+
     const salt = await genSalt(
       Number(this.configService.get<number>('SALT_VALUE'))
     );
@@ -336,6 +343,7 @@ export class UserService {
     // user: UserEntity
   ): Promise<UserEntity> {
     await this.emailValidation(profileDto.email, id);
+    if (profileDto.hasServiceAccess) await this.inviteUser(id);
 
     const userProfile = await this.userRepository
       .createQueryBuilder('user')

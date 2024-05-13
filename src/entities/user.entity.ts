@@ -53,6 +53,9 @@ export class UserEntity {
   @Column({ default: false })
   hasServiceAccess: boolean;
 
+  @Column({ default: false })
+  hasOnlineReception: boolean;
+
   @Column({ nullable: true, default: null, select: false })
   passwordResetToken: string;
 

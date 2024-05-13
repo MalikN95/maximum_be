@@ -1,5 +1,11 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 import { StatusEnum } from '@common/enums/status.enum';
 import { GenderEnum } from '@common/enums/gender.enum';
@@ -22,6 +28,24 @@ export class ProfileDto {
   @IsEmail()
   @IsOptional()
   email?: string;
+
+  @ApiPropertyOptional({
+    description: 'hasOnlineReception',
+    default: 'true',
+    required: false,
+  })
+  @IsBoolean()
+  @IsOptional()
+  hasOnlineReception?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'hasServiceAccess',
+    default: 'true',
+    required: false,
+  })
+  @IsBoolean()
+  @IsOptional()
+  hasServiceAccess?: boolean;
 
   @ApiPropertyOptional({
     description: 'Status',

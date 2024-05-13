@@ -143,7 +143,7 @@ export class AuthService {
       throw new UnauthorizedException(PASSWORD_CHANGE_REQUIRED);
     }
 
-    if (user.status !== StatusEnum.ACTIVE) {
+    if (!user.hasServiceAccess && !user.isAdmin) {
       throw new UnauthorizedException(ACCOUNT_NOT_EXIST);
     }
 
