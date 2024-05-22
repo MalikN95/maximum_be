@@ -11,6 +11,7 @@ import { UserModule } from '@modules/user/user.module';
 import { SeedsModule } from './modules/seeds/seeds.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { FilesService } from '@modules/files/files.service';
+import { RoleModule } from './modules/role/role.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { FilesService } from '@modules/files/files.service';
     EmailModule,
     SeedsModule,
     CustomerModule,
+    RoleModule,
   ],
   providers: [FilesService],
   controllers: [],

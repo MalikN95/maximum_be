@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { genSalt, hashSync } from 'bcrypt';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { RoleEntity } from '@entities/role.entity';
 import { UserEntity } from '@entities/user.entity';
@@ -15,8 +15,8 @@ export class SeedsService {
   private logger = new Logger('SeedsService');
 
   constructor(
-    private dataSource: DataSource,
     private configService: ConfigService,
+
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(RoleEntity)

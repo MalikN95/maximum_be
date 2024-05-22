@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateCustomerDto } from './dto/customer.dto';
+import { SearchDto } from '@common/dto/search.dto';
 
 @Injectable()
 export class CustomerService {
@@ -19,12 +20,34 @@ export class CustomerService {
   ) {}
 
   async getCustomerList(
-    paginationDto: PaginationDto
+    paginationDto: PaginationDto,
+    searchDto: SearchDto
   ): Promise<PaginationResult<CustomerEntity>> {
     const { skipPages, pageSize } = paginationDto;
+    const { searchValue } = searchDto;
+
+    let searchWords: string[];
+
+    if (searchValue)
+      searchWords = searchValue
+        .trim()
+        .split(' ')
+        .map((keyword) => `%${keyword}%`);
 
     const [result, total] = await this.customerRepository
       .createQueryBuilder('customer')
+      .where(
+        searchValue
+          ? `( 
+            customer.name ILIKE ANY(:searchValue) OR 
+            customer.email ILIKE ANY(:searchValue) OR 
+            customer.phone ILIKE ANY(:searchValue)
+            )`
+          : 'true = true',
+        {
+          searchValue: searchWords,
+        }
+      )
       .skip(pageSize * skipPages)
       .take(pageSize)
       .orderBy('customer.name', 'ASC')
@@ -36,10 +59,18 @@ export class CustomerService {
     };
   }
 
+  async getCustomer(id: string): Promise<CustomerEntity> {
+    const customer = await this.customerRepository
+      .createQueryBuilder('customer')
+      .where('id = :id', { id })
+      .getOne();
+
+    return customer;
+  }
+
   async createCustomer(
     createCustomerDto: CreateCustomerDto
   ): Promise<CustomerEntity> {
-
     const customer = await this.customerRepository
       .createQueryBuilder('customer')
       .insert()

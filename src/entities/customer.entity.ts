@@ -17,12 +17,21 @@ export class CustomerEntity {
   @Column()
   name: string;
 
+  @Column()
+  phone: string;
+
+  @Column({ nullable: true })
+  email: string;
+
   @Column({
     type: 'enum',
     enum: GenderEnum,
     default: GenderEnum.MALE,
   })
   gender: GenderEnum;
+
+  @CreateDateColumn({ nullable: true })
+  dateOfBirth: Date;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
