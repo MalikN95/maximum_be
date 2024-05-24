@@ -14,6 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBadRequestResponse,
   ApiResponse,
@@ -24,6 +25,7 @@ import {
   ApiConsumes,
 } from '@nestjs/swagger';
 
+import { IMAGE_MIMETYPE } from '@common/constants/shared.constant';
 import { GetUser } from '@common/decorators/user.decorator';
 import { PaginationDto } from '@common/dto/pagination.dto';
 import { SearchDto } from '@common/dto/search.dto';
@@ -38,8 +40,6 @@ import { RegisterDto } from './dto/register.dto';
 import { UserSortDto } from './dto/sort.dto';
 import { StatusDto } from './dto/status.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
-import { IMAGE_MIMETYPE } from '@common/constants/shared.constant';
-import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('user')
 @Controller('user')

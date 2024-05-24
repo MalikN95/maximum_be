@@ -1,19 +1,15 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
-  Matches,
   MaxLength,
 } from 'class-validator';
 
 import { GenderEnum } from '@common/enums/gender.enum';
-import { StatusEnum } from '@common/enums/status.enum';
-
-import { FAX_VALIDATION, PHONE_VALIDATION } from '../user.constants';
-import { Type } from 'class-transformer';
 
 export class RegisterDto {
   @ApiProperty({

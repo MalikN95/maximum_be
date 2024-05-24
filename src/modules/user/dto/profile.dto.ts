@@ -7,8 +7,8 @@ import {
   IsString,
 } from 'class-validator';
 
-import { StatusEnum } from '@common/enums/status.enum';
 import { GenderEnum } from '@common/enums/gender.enum';
+import { StatusEnum } from '@common/enums/status.enum';
 
 export class ProfileDto {
   @ApiPropertyOptional({

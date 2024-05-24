@@ -13,13 +13,14 @@ import { EntityManager, Repository } from 'typeorm';
 
 import { PaginationDto } from '@common/dto/pagination.dto';
 import { SearchDto } from '@common/dto/search.dto';
-import { RoleEnum } from '@common/enums/role.enum';
 import { UserSortEnum } from '@common/enums/user-sort.enum';
 import { PaginationResult } from '@common/interfaces/pagination-res.interface';
+import { generateRandomCode } from '@common/utils/main';
 import { RoleEntity } from '@entities/role.entity';
 import { UserEntity } from '@entities/user.entity';
 import { EMAIL_IS_USE } from '@modules/auth/auth.constants';
 import { EmailService } from '@modules/email/email.service';
+import { FilesService } from '@modules/files/files.service';
 
 import { EmailDto } from './dto/email.dto';
 import { ProfileDto } from './dto/profile.dto';
@@ -36,12 +37,9 @@ import {
   SEND_PASSWORD_RESET_EMAIL,
   SUCCESSFULLY_DELETE_USER,
   SUCCESSFULLY_PASSWORD_RESET,
-  USER_CAN_NOT_CHANGE_OWN_ROLE,
   USER_FOLDER,
   USER_NOT_FOUND,
 } from './user.constants';
-import { FilesService } from '@modules/files/files.service';
-import { generateRandomCode } from '@common/utils/main';
 
 @Injectable()
 export class UserService {
@@ -92,6 +90,7 @@ export class UserService {
     file: Express.Multer.File
   ): Promise<UserEntity> {
     const { email, ...data } = registerDto;
+
     console.log(registerDto, file);
 
     const upload: { key: string } = file

@@ -4,6 +4,7 @@ import {
   Entity,
   Index,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,6 +13,7 @@ import { GenderEnum } from '@common/enums/gender.enum';
 import { StatusEnum } from '@common/enums/status.enum';
 
 import { RoleEntity } from './role.entity';
+import { VisitEntity } from './visit.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -63,6 +65,11 @@ export class UserEntity {
     onDelete: 'SET NULL',
   })
   role: RoleEntity;
+
+  @OneToMany(() => VisitEntity, (visit) => visit.user, {
+    onDelete: 'SET NULL',
+  })
+  visit: VisitEntity[];
 
   @Column({
     type: 'enum',

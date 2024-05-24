@@ -7,7 +7,7 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { CustomerService } from './customer.service';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBadRequestResponse,
   ApiOkResponse,
@@ -15,14 +15,16 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { PaginationDto } from '@common/dto/pagination.dto';
-import { CustomerEntity } from '@entities/customer.entity';
-import { PaginationResult } from '@common/interfaces/pagination-res.interface';
-import { CreateCustomerDto } from './dto/customer.dto';
-import { AuthGuard } from '@nestjs/passport';
+
 import { GetUser } from '@common/decorators/user.decorator';
-import { UserEntity } from '@entities/user.entity';
+import { PaginationDto } from '@common/dto/pagination.dto';
 import { SearchDto } from '@common/dto/search.dto';
+import { PaginationResult } from '@common/interfaces/pagination-res.interface';
+import { CustomerEntity } from '@entities/customer.entity';
+import { UserEntity } from '@entities/user.entity';
+
+import { CustomerService } from './customer.service';
+import { CreateCustomerDto } from './dto/customer.dto';
 
 @ApiTags('customer')
 @Controller('customer')

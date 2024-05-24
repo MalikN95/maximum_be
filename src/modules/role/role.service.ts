@@ -1,8 +1,4 @@
-import {
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -15,7 +11,6 @@ import { UserEntity } from '@entities/user.entity';
 import { RoleSortDto } from './dto/role-sort.dto';
 import { RoleDto } from './dto/role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { USER_CAN_NOT_DELETE_OWN_ROLE } from './role.constants';
 
 @Injectable()
 export class RoleService {

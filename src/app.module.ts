@@ -6,12 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSource } from '@config/conf';
 import { AuthModule } from '@modules/auth/auth.module';
 import { EmailModule } from '@modules/email/email.module';
+import { FilesService } from '@modules/files/files.service';
 import { UserModule } from '@modules/user/user.module';
 
-import { SeedsModule } from './modules/seeds/seeds.module';
 import { CustomerModule } from './modules/customer/customer.module';
-import { FilesService } from '@modules/files/files.service';
 import { RoleModule } from './modules/role/role.module';
+import { SeedsModule } from './modules/seeds/seeds.module';
+import { VisitModule } from './modules/visit/visit.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { RoleModule } from './modules/role/role.module';
     SeedsModule,
     CustomerModule,
     RoleModule,
+    VisitModule,
   ],
   providers: [FilesService],
   controllers: [],

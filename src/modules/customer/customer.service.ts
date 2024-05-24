@@ -1,13 +1,15 @@
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+
 import { PaginationDto } from '@common/dto/pagination.dto';
+import { SearchDto } from '@common/dto/search.dto';
 import { PaginationResult } from '@common/interfaces/pagination-res.interface';
 import { CustomerEntity } from '@entities/customer.entity';
 import { EmailService } from '@modules/email/email.service';
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+
 import { CreateCustomerDto } from './dto/customer.dto';
-import { SearchDto } from '@common/dto/search.dto';
 
 @Injectable()
 export class CustomerService {

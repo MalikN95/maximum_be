@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { GenderEnum } from '@common/enums/gender.enum';
+
+import { VisitEntity } from './visit.entity';
 @Entity('customer')
 export class CustomerEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -32,6 +35,11 @@ export class CustomerEntity {
 
   @CreateDateColumn({ nullable: true })
   dateOfBirth: Date;
+
+  @OneToMany(() => VisitEntity, (visit) => visit.customer, {
+    onDelete: 'SET NULL',
+  })
+  visit: VisitEntity[];
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;

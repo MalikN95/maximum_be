@@ -64,7 +64,6 @@ export class AuthService {
         user.lastPasswordUpdate < passwordChangeDateStart ? true : false,
     };
 
-
     return {
       profile: tokenPayload,
       accessToken: await this.createAccessToken(tokenPayload),

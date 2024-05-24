@@ -1,8 +1,7 @@
-import { Body, Controller, Get, Logger, Post, Param } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiOperation,
-  ApiParam,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';

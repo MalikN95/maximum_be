@@ -9,8 +9,6 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 
-import { GLOBAL_VALIDATION_ERR } from '@common/constants/shared.constant';
-
 @Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger('CustomExceptionFilter');

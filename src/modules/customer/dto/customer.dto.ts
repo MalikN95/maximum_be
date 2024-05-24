@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsDate,
   IsEmail,
@@ -10,7 +11,6 @@ import {
 } from 'class-validator';
 
 import { GenderEnum } from '@common/enums/gender.enum';
-import { Type } from 'class-transformer';
 
 export class CreateCustomerDto {
   @ApiProperty({

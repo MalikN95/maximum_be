@@ -20,7 +20,7 @@ export class SeedsService {
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(RoleEntity)
-    private readonly roleRepository: Repository<RoleEntity>,
+    private readonly roleRepository: Repository<RoleEntity>
   ) {}
 
   async createSeeds(): Promise<boolean | string> {
