@@ -13,6 +13,7 @@ import { GenderEnum } from '@common/enums/gender.enum';
 import { StatusEnum } from '@common/enums/status.enum';
 
 import { RoleEntity } from './role.entity';
+import { UserServiceEntity } from './user-service.entity';
 import { VisitEntity } from './visit.entity';
 
 @Entity('user')
@@ -70,6 +71,11 @@ export class UserEntity {
     onDelete: 'SET NULL',
   })
   visit: VisitEntity[];
+
+  @OneToMany(() => UserServiceEntity, (userService) => userService.user, {
+    onDelete: 'SET NULL',
+  })
+  userService: UserServiceEntity[];
 
   @Column({
     type: 'enum',

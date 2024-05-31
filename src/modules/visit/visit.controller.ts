@@ -1,19 +1,20 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBadRequestResponse,
-  ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { VisitService } from './visit.service';
-import { VisitEntity } from '@entities/visit.entity';
-import { VisitDto } from './dto/visit.dto';
+
 import { PaginationDto } from '@common/dto/pagination.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { PaginationResult } from '@common/interfaces/pagination-res.interface';
 import { SearchDto } from '@common/dto/search.dto';
+import { PaginationResult } from '@common/interfaces/pagination-res.interface';
+import { VisitEntity } from '@entities/visit.entity';
+
 import { VisitFilterDto } from './dto/visit-filter.dto';
+import { VisitDto } from './dto/visit.dto';
+import { VisitService } from './visit.service';
 
 @ApiTags('visit')
 @Controller('visit')

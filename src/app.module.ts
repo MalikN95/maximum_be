@@ -12,8 +12,8 @@ import { UserModule } from '@modules/user/user.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { RoleModule } from './modules/role/role.module';
 import { SeedsModule } from './modules/seeds/seeds.module';
-import { VisitModule } from './modules/visit/visit.module';
 import { ServiceModule } from './modules/service/service.module';
+import { VisitModule } from './modules/visit/visit.module';
 
 @Module({
   imports: [

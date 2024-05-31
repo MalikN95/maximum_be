@@ -1,6 +1,5 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
-  IsArray,
   IsBoolean,
   IsNumber,
   IsOptional,
@@ -8,7 +7,7 @@ import {
   MaxLength,
 } from 'class-validator';
 
-export class UpdateServiceDto {
+export class CreateServiceDto {
   @ApiPropertyOptional({
     description: 'Service name',
     default: 'Service',
@@ -58,24 +57,4 @@ export class UpdateServiceDto {
   @IsNumber()
   @IsOptional()
   duration?: number;
-
-  @ApiPropertyOptional({
-    description: 'serviceEmployee',
-    example: [
-      '09b059ae5fceac4211eb7bf91936faa5',
-      '09b059ae5fceac4211eb7bf91936ff29',
-      '09b059ae5fceac4211eb7bf91936f45a',
-    ],
-    default: [
-      '09b059ae5fceac4211eb7bf91936faa5',
-      '09b059ae5fceac4211eb7bf91936faa5',
-      '09b059ae5fceac4211eb7bf91936faa5',
-    ],
-    required: false,
-    isArray: true,
-    type: String,
-  })
-  @IsArray()
-  @IsOptional()
-  serviceEmployee?: string[];
 }

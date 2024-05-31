@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { VisitDto } from './dto/visit.dto';
-import { VisitEntity } from '@entities/visit.entity';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { PaginationDto } from '@common/dto/pagination.dto';
-import { PaginationResult } from '@common/interfaces/pagination-res.interface';
 import { SearchDto } from '@common/dto/search.dto';
+import { PaginationResult } from '@common/interfaces/pagination-res.interface';
+import { VisitEntity } from '@entities/visit.entity';
+
 import { VisitFilterDto } from './dto/visit-filter.dto';
+import { VisitDto } from './dto/visit.dto';
 
 @Injectable()
 export class VisitService {

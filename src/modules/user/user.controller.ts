@@ -155,7 +155,7 @@ export class UserController {
     return this.userService.inviteUser(id);
   }
 
-  @Get(':id')
+  @Get('by-id/:id')
   @ApiResponse({ status: 200, type: Object })
   @ApiBadRequestResponse({ description: 'Bad Request' })
   @UseGuards(AuthGuard('jwt'))

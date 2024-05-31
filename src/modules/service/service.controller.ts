@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBadRequestResponse,
   ApiOperation,
@@ -6,13 +16,15 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { ServiceService } from './service.service';
+
 import { PaginationDto } from '@common/dto/pagination.dto';
 import { SearchDto } from '@common/dto/search.dto';
-import { AuthGuard } from '@nestjs/passport';
-import { ServiceEntity } from '@entities/service.entity';
 import { PaginationResult } from '@common/interfaces/pagination-res.interface';
+import { ServiceEntity } from '@entities/service.entity';
+
+import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
+import { ServiceService } from './service.service';
 
 @ApiTags('service')
 @Controller('service')
@@ -33,6 +45,20 @@ export class ServiceController {
     return this.serviceService.getServiceList(paginationDto, searchDto);
   }
 
+  @Get('by-id/:id')
+  @ApiResponse({ status: 200, type: Object })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
+  @UseGuards(AuthGuard('jwt'))
+  @ApiParam({
+    name: 'id',
+    type: String,
+    required: true,
+    description: 'User id',
+  })
+  getService(@Param('id') id: string): Promise<ServiceEntity> {
+    return this.serviceService.getService(id);
+  }
+
   @Patch('by-id/:id')
   @ApiResponse({ status: 200, type: ServiceEntity })
   @ApiBadRequestResponse({ description: 'Bad Request' })
@@ -46,10 +72,23 @@ export class ServiceController {
     required: true,
     description: 'Role id',
   })
-  updateRole(
+  updateService(
     @Param('id') id: string,
     @Body() updateServiceDto: UpdateServiceDto
   ): Promise<ServiceEntity> {
     return this.serviceService.updateService(id, updateServiceDto);
+  }
+
+  @Post()
+  @ApiResponse({ status: 200, type: ServiceEntity })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
+  @ApiOperation({
+    summary: 'Create service',
+  })
+  @UseGuards(AuthGuard('jwt'))
+  createService(
+    @Body() createServiceDto: CreateServiceDto
+  ): Promise<ServiceEntity> {
+    return this.serviceService.createService(createServiceDto);
   }
 }

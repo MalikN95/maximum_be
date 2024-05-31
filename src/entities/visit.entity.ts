@@ -7,9 +7,10 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { VisitStatusEnum } from '@common/enums/visit-status.enum';
+
 import { CustomerEntity } from './customer.entity';
 import { UserEntity } from './user.entity';
-import { VisitStatusEnum } from '@common/enums/visit-status.enum';
 
 @Entity('visit')
 export class VisitEntity {
