@@ -15,6 +15,7 @@ import { VisitEntity } from '@entities/visit.entity';
 import { VisitFilterDto } from './dto/visit-filter.dto';
 import { VisitDto } from './dto/visit.dto';
 import { VisitService } from './visit.service';
+import { DayVisitFilterDto } from './dto/day-visit-filter.dto';
 
 @ApiTags('visit')
 @Controller('visit')
@@ -38,6 +39,19 @@ export class VisitController {
       searchDto,
       visitFilterDto
     );
+  }
+
+  @Get('day')
+  @ApiResponse({ status: 200, type: VisitEntity })
+  @ApiBadRequestResponse({ description: 'Bad Request' })
+  @ApiOperation({
+    summary: 'Get visit list with pagination',
+  })
+  @UseGuards(AuthGuard('jwt'))
+  getDayVisitList(
+    @Query() dayVisitFilterDto: DayVisitFilterDto
+  ): Promise<VisitEntity[][]> {
+    return this.visitService.getDayVisitList(dayVisitFilterDto);
   }
 
   @Post()

@@ -10,6 +10,8 @@ import { VisitEntity } from '@entities/visit.entity';
 
 import { VisitFilterDto } from './dto/visit-filter.dto';
 import { VisitDto } from './dto/visit.dto';
+import { DayVisitFilterDto } from './dto/day-visit-filter.dto';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class VisitService {
@@ -62,6 +64,38 @@ export class VisitService {
       data: result,
       count: total,
     };
+  }
+
+  async getDayVisitList(
+    dayVisitFilterDto: DayVisitFilterDto
+  ): Promise<VisitEntity[][]> {
+    const { day, employeeId } = dayVisitFilterDto;
+    const visits = await this.visitRepository
+      .createQueryBuilder('visit')
+      .leftJoinAndSelect('visit.user', 'user')
+      .leftJoinAndSelect('visit.customer', 'customer')
+      .where(employeeId ? 'user.id = :employeeId' : 'true', { employeeId })
+      .orderBy(`visit.startTime`, 'ASC')
+      .getMany();
+
+    const separatedVisits: VisitEntity[][] = [];
+
+    for (const visit of visits) {
+      const idx = separatedVisits.findIndex((item) =>
+        item.some(
+          (visitItem: VisitEntity) => visitItem.user.id === visit.user.id
+        )
+      );
+
+      if (idx >= 0) {
+        separatedVisits[idx].push(visit);
+      } else {
+        visit.randomId = randomUUID();
+        separatedVisits.push([visit]);
+      }
+    }
+
+    return separatedVisits;
   }
 
   async addVisit(visitDto: VisitDto): Promise<VisitEntity> {

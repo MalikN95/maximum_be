@@ -41,4 +41,6 @@ export class VisitEntity {
 
   @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
+
+  randomId: string;
 }
